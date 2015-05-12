@@ -1,9 +1,23 @@
-export PS1="\[\e[38;5;49m\]___________________    | \w @ \h (\u) \n| =>\[\e[0m\] "
-export PS2="| => "
+#   Add Git to Bash 
+    parse_git_branch() {
+         git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+    }
+
+export PS1="\[\e[38;5;32m\]___________________ |\[\e[0m\] \[\e[0;33m\]\w\[\e[0m\]\[\e[38;5;32m\] @ \u\[\e[0m\]\[\e[0;35m\]\$(parse_git_branch)\[\e[0m\]\[\e[38;5;32m\] \n$\[\e[0m\] "
+export PS2="$ "
 
 #   Set Path
-#    ------------------------------------------------------------------
+#   ------------------------------------------------------------------
     export PATH=/usr/local/bin:$PATH
+    export PATH=/usr/local/sbin:$PATH
+
+#    RBENV
+#   ------------------------------------------------------------------
+    RBENV_ROOT=/usr/local/var/rbenv
+    
+    if which rbenv > /dev/null; 
+        then eval "$(rbenv init -)"; 
+    fi
 
 #   finderShowHidden:   Show hidden files in Finder
 #   finderHideHidden:   Hide hidden files in Finder
