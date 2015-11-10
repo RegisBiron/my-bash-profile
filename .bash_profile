@@ -3,13 +3,16 @@
          git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
     }
 
-export PS1="\[\e[38;5;32m\]___________________ |\[\e[0m\] \[\e[0;33m\]\w\[\e[0m\]\[\e[38;5;32m\] @ \u\[\e[0m\]\[\e[0;35m\]\$(parse_git_branch)\[\e[0m\]\[\e[38;5;32m\] \n$\[\e[0m\] "
-export PS2="$ "
+    export PS1="\[\e[38;5;32m\]___________________ |\[\e[0m\] \[\e[0;33m\]\w\[\e[0m\]\[\e[38;5;32m\] @ \u\[\e[0m\]\[\e[0;35m\]\$(parse_git_branch)\[\e[0m\]\[\e[38;5;32m\] \n$\[\e[0m\] "
+    export PS2="$ "
 
 #   Set Path
 #   ------------------------------------------------------------------
     export PATH=/usr/local/bin:$PATH
     export PATH=/usr/local/sbin:$PATH
+
+#   MAMP MySQL
+#   export PATH=$PATH:/Applications/MAMP/Library/bin/
 
 #    RBENV
 #   ------------------------------------------------------------------
@@ -39,3 +42,19 @@ export PS2="$ "
 
 #   Homebrew-cask
     export HOMEBREW_CASK_OPTS='--appdir=/Applications'
+    
+#	rbenv init
+	eval "$(rbenv init -)"
+
+#	Bash completion
+	if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    	. $(brew --prefix)/etc/bash_completion
+  	fi
+
+#   Open browser and submit PR for current branch against master 
+    pr () {
+        local repo=`git remote -v | grep -m 1 "(push)" | sed -e "s/.*github.com[:/]\(.*\)\.git.*/\1/"`
+        local branch=`git name-rev --name-only HEAD`
+        echo "...creating pull request for branch \"$branch\" in \"$repo\""
+        open https://github.com/$repo/pull/new/$branch
+    }
