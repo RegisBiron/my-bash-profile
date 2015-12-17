@@ -14,13 +14,16 @@
 #   MAMP MySQL
 #   export PATH=$PATH:/Applications/MAMP/Library/bin/
 
-#    RBENV
+#   RBENV
 #   ------------------------------------------------------------------
+    export PATH="$HOME/.rbenv/shims:$PATH"
     RBENV_ROOT=/usr/local/var/rbenv
     
     if which rbenv > /dev/null; 
         then eval "$(rbenv init -)"; 
     fi
+
+    eval "$(rbenv init -)"
 
 #   finderShowHidden:   Show hidden files in Finder
 #   finderHideHidden:   Hide hidden files in Finder
@@ -42,14 +45,11 @@
 
 #   Homebrew-cask
     export HOMEBREW_CASK_OPTS='--appdir=/Applications'
-    
-#	rbenv init
-	eval "$(rbenv init -)"
 
 #	Bash completion
-	if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    	. $(brew --prefix)/etc/bash_completion
-  	fi
+    if [ -f $(brew --prefix)/etc/bash_completion ]; then
+        . $(brew --prefix)/etc/bash_completion
+    fi
 
 #   Open browser and submit PR for current branch against master 
     pr () {
