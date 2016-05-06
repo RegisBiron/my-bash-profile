@@ -32,6 +32,9 @@
     alias finderHideHidden='defaults write com.apple.finder AppleShowAllFiles NO'
     alias spacerTile="defaults write com.apple.dock persistent-apps -array-add '{'tile-type'='spacer-tile';}'"
 
+#   Hub
+    alias git=hub
+
 #   MAMP MySQL
     alias mampMysql='/Applications/MAMP/Library/bin/mysql --host=localhost -uroot -proot'
 
@@ -43,8 +46,20 @@
 #   Clear Icon Cache
     alias clearIconCache='sudo find /private/var/folders/ -name com.apple.dock.iconcache -exec rm {} \; && sudo find /private/var/folders/ -name com.apple.iconservices -exec rm -rf {} \;'
 
+#   Reset wifi
+    alias wifi='sudo ifconfig en0 down && sudo ifconfig en0 up'
+
+#   Check Local Weather    
+    alias weather='curl -s http://wttr.in/Boston | head -7 | tail -5'
+
+#   Watch Star Wars
+    alias starWars='telnet towel.blinkenlights.nl'
+
 #   Homebrew-cask
     export HOMEBREW_CASK_OPTS='--appdir=/Applications'
+    
+#   Added by the Heroku Toolbelt
+    export PATH="/usr/local/heroku/bin:$PATH"
 
 #	Bash completion
     if [ -f $(brew --prefix)/etc/bash_completion ]; then
@@ -58,3 +73,15 @@
         echo "...creating pull request for branch \"$branch\" in \"$repo\""
         open https://github.com/$repo/pull/new/$branch
     }
+
+#   NVM
+#   source $(brew --prefix nvm)/nvm.sh
+    if test "$(which brew)"; then
+
+      NVM_INSTALL=$(brew --prefix nvm)
+
+      if [ -d "$NVM_INSTALL" ]; then
+        export NVM_DIR="$HOME/.nvm"
+        . "$NVM_INSTALL/nvm.sh"
+      fi
+    fi
