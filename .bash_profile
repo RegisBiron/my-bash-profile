@@ -10,6 +10,7 @@
 #   ------------------------------------------------------------------
     export PATH=/usr/local/bin:$PATH
     export PATH=/usr/local/sbin:$PATH
+    export PATH="$(brew --prefix php56)/bin:$PATH"
 
 #   MAMP MySQL
 #   export PATH=$PATH:/Applications/MAMP/Library/bin/
@@ -61,7 +62,7 @@
 #   Added by the Heroku Toolbelt
     export PATH="/usr/local/heroku/bin:$PATH"
 
-#	Bash completion
+#	Bash completions
     if [ -f $(brew --prefix)/etc/bash_completion ]; then
         . $(brew --prefix)/etc/bash_completion
     fi
@@ -85,3 +86,6 @@
         . "$NVM_INSTALL/nvm.sh"
       fi
     fi
+    
+#   Load RVM into a shell session *as a function*
+    [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
